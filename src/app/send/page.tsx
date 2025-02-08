@@ -6,17 +6,15 @@ import {useAccountStore} from "@/store/useAccountInfoStore";
 import {useRouter} from "next/navigation";
 const SendPage = () => {
   const router = useRouter()
-  const { selectAccount, selectTarget, money, setMoney } = useAccountStore();
+  const { selectAccountId, selectAccountName, selectTargetAccount, selectMoney, selectTargetId, money, setMoney } = useAccountStore();
   const { mutate: updatemoney } = useMutation({
     mutationKey: ["updatemoney"],
     mutationFn: (form) => updateRemit(form),
     onSuccess: (res) => {
-      console.log(res)
       alert(res.data.message);
       router.push("/remit")
     },
     onError: (err) => {
-      console.log(err)
       alert(err.response.data.error)
     }
   })
@@ -27,12 +25,10 @@ const SendPage = () => {
     setMoney(numericValue);
   };
 
-  console.log(selectAccount, selectTarget, money)
-
   const onCreate = () => {
     updatemoney({
-      accountId: selectAccount,
-      targetId: selectTarget,
+      accountId: selectAccountId,
+      targetId: selectTargetId,
       money: money,
       type: "a"
     })
@@ -41,12 +37,11 @@ const SendPage = () => {
   return (
       <div className={styles.sendWrap}>
         <div className={styles.txtWrap}>
-          <h2><strong>내 토스뱅크 통장</strong>에서</h2>
-          <p>잔액 <span>151,190</span> 원</p>
+          <h2><strong>{selectAccountName}</strong>에서</h2>
+          <p>잔액 <span>{selectMoney.toLocaleString()}</span> 원</p>
         </div>
         <div className={styles.txtWrap}>
-          <h2><strong>내 우리 SUPER주거래 통장</strong>으로</h2>
-          <p>우리은행 111122223333</p>
+          <h2><strong>{selectTargetAccount}</strong> 으로</h2>
         </div>
         <div className={styles.inputWrap}>
           <div>
@@ -59,7 +54,7 @@ const SendPage = () => {
             />
             <button onClick={onCreate}>송금</button>
           </div>
-          <p>잔액 111원 입력</p>
+          <p>잔액 {selectMoney.toLocaleString()}원 입력</p>
         </div>
 
       </div>

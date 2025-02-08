@@ -9,7 +9,8 @@ import Link from "next/link";
 import {useAccountStore} from "@/store/useAccountInfoStore";
 
 const RemitAccount = () => {
-  const setSelectedTarget = useAccountStore((set) => set.setSelectedTarget);
+  const setSelectedTargetId = useAccountStore((set) => set.setSelectedTargetId);
+  const setSelectedTargetAccount = useAccountStore((set) => set.setSelectedTargetAccount);
 
   const { data: recentlist } = useQuery({
     queryKey: ["recentlist"],
@@ -21,8 +22,9 @@ const RemitAccount = () => {
     queryFn: () => fetchContactData()
   });
 
-  const handleContactClick = (itemId: number) => {
-    setSelectedTarget(itemId)
+  const handleContactClick = (item) => {
+    setSelectedTargetId(item.id);
+    setSelectedTargetAccount(item.account)
   }
   const { selectedTab, setSelectedTab } = useTabStore();
   return (
@@ -49,6 +51,7 @@ const RemitAccount = () => {
                     <div
                         key={`recent-${idx}`}
                         className={styles.contactInfo}
+                        onClick={() => handleContactClick(item)}
                     >
                       <Image src={Logo} alt={"토스로고"} width={40} height={40}/>
                       <div>
@@ -66,7 +69,7 @@ const RemitAccount = () => {
                       <div
                           className={styles.contactInfo}
                           key={`contact-${idx}`}
-                          onClick={() => handleContactClick(item.id)}
+                          onClick={() => handleContactClick(item)}
                       >
                         <Image src={Logo} alt={"토스로고"} width={40} height={40}/>
                         <div>
