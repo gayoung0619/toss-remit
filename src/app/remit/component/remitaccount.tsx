@@ -1,9 +1,29 @@
 "use client";
 import styles from "./remitaccount.module.css";
-import AccountList from "@/components/accountlist";
 import { useTabStore } from "@/store/useTabStore";
+import {useQuery} from "@tanstack/react-query";
+import {fetchContactData, fetchRecentData} from "@/api/account";
+import Image from "next/image";
+import Logo from "@/assets/logo-toss.png";
+import Link from "next/link";
+import {useAccountStore} from "@/store/useAccountInfoStore";
 
 const RemitAccount = () => {
+  const setSelectedTarget = useAccountStore((set) => set.setSelectedTarget);
+
+  const { data: recentlist } = useQuery({
+    queryKey: ["recentlist"],
+    queryFn: () => fetchRecentData()
+  });
+
+  const { data: contactlist } = useQuery({
+    queryKey: ["contactlist"],
+    queryFn: () => fetchContactData()
+  });
+
+  const handleContactClick = (itemId: number) => {
+    setSelectedTarget(itemId)
+  }
   const { selectedTab, setSelectedTab } = useTabStore();
   return (
       <div>
@@ -11,7 +31,7 @@ const RemitAccount = () => {
           <li
               className={selectedTab === 0 ? styles.on : ""}
               onClick={() => setSelectedTab(0)}>
-            계좌
+            최근 계좌
           </li>
           <li
               className={selectedTab === 1 ? styles.on : ""}
@@ -25,15 +45,38 @@ const RemitAccount = () => {
         <div className={styles.tabContent}>
           {selectedTab === 0 && (
               <div className={styles.tabPanel}>
-                1
-                <AccountList />
+                {recentlist?.data.map((item, idx) => (
+                    <div
+                        key={`recent-${idx}`}
+                        className={styles.contactInfo}
+                    >
+                      <Image src={Logo} alt={"토스로고"} width={40} height={40}/>
+                      <div>
+                        <strong>{item.name}</strong>
+                        <p>{item.account}</p>
+                      </div>
+                    </div>
+                ))}
               </div>
           )}
           {selectedTab === 1 && (
-              <div className={styles.tabPanel}>
-                2
-                <AccountList />
-              </div>
+              <Link href={`/send`}>
+                <div className={styles.tabPanel}>
+                  {contactlist?.data.map((item, idx) => (
+                      <div
+                          className={styles.contactInfo}
+                          key={`contact-${idx}`}
+                          onClick={() => handleContactClick(item.id)}
+                      >
+                        <Image src={Logo} alt={"토스로고"} width={40} height={40}/>
+                        <div>
+                          <strong>{item.name}</strong>
+                          <p>{item.phone}</p>
+                        </div>
+                      </div>
+                  ))}
+                </div>
+              </Link>
           )}
         </div>
       </div>

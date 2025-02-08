@@ -16,8 +16,8 @@
 }
 .bankInfo p{
     font-size: 12px;
-    margin-top: 5px;
-    color: #f8f9fa;
+    margin-top: 8px;
+    color: rgba(255,255,255, .5);
     font-weight: 300;
 }
 .bankButton{

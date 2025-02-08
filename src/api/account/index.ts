@@ -14,7 +14,7 @@ export const fetchContactData = () => {
 
 // 최근 연락처
 export const fetchRecentData = () => {
-  return axios.get(`${baseUrl}/api/account/recent?type=a_`);
+  return axios.get(`${baseUrl}/api/account/recent?type=a`);
 };
 
 // 은행 데이터

@@ -23,8 +23,9 @@
     width: 100%;
     border: none;
     border-bottom: 1px solid #f8f9fa;
-    padding: 10px 0;
+    padding: 10px;
     font-size: 20px;
+    color: #fff;
 }
 .tabContent{
     margin-top: 20px;
@@ -33,5 +34,25 @@
     gap: 15px;
 }
 .tabPanel{
-
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.contactInfo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.contactInfo img{
+    border-radius: 50%;
+}
+.contactInfo strong{
+    font-size: 16px;
+}
+.contactInfo p{
+    font-size: 12px;
+    margin-top: 5px;
+    color: #f8f9fa;
+    font-weight: 300;
 }

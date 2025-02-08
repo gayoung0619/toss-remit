@@ -1,0 +1,48 @@
+.sendWrap{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    color: rgba(255,255,255,.6);
+}
+.txtWrap h2{
+    font-size: 24px;
+    font-weight: 300;
+}
+.txtWrap h2 strong{
+    font-weight: 700;
+    color: rgba(255,255,255,1);
+}
+.txtWrap p {
+    margin-top: 10px;
+}
+.txtWrap p span{
+    color: rgba(255,255,255, .9);
+}
+.inputWrap > div{
+    display: flex;
+    justify-content: space-between;
+}
+.inputWrap input{
+    background: none;
+    border: none;
+    color: rgba(255,255,255,1);
+    font-size: 30px;
+    width: 80%;
+}
+.inputWrap button{
+    background: rgba(255,255,255,.25);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: #DDD;
+    cursor: pointer;
+    font-size: 12px;
+
+}
+.inputWrap p{
+    display: inline-block;
+    margin-top: 10px;
+    background: rgba(255,255,255,.15);
+    border-radius: 8px;
+    padding: 10px;
+}
