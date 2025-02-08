@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import styles from "./layout.module.css"
+import Providers from "@/utils/providers";
 
 
 export const metadata: Metadata = {
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
       <div className={styles.wrapper}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </div>
       </body>
     </html>

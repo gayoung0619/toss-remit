@@ -3,14 +3,14 @@ import Image from "next/image";
 import Logo from "@/assets/logo-toss.png";
 import Link from "next/link";
 
-const AccountList = () => {
+const AccountList = ({item}) => {
   return (
       <li className={styles.accountList}>
         <div className={styles.bankInfo}>
           <Image src={Logo} alt={"토스로고"} width={40} height={40}/>
           <div>
-            <strong>500,000원</strong>
-            <p>토스뱅크 통장</p>
+            <strong>{item.balance}</strong>
+            <p>{item.name}</p>
           </div>
         </div>
         <Link
