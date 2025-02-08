@@ -12,7 +12,7 @@ const SendPage = () => {
     mutationFn: (form) => updateRemit(form),
     onSuccess: (res) => {
       alert(res.data.message);
-      router.push("/remit")
+      router.push("/result")
     },
     onError: (err) => {
       alert(err.response.data.error)
@@ -29,7 +29,7 @@ const SendPage = () => {
     updatemoney({
       accountId: selectAccountId,
       targetId: selectTargetId,
-      money: money,
+      money: 200,
       type: "a"
     })
   }

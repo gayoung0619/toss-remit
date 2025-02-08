@@ -24,8 +24,8 @@ export const useAccountStore = create<AccountState>((set) => ({
   setSelectedMoney: (account: number) => set({ selectMoney: account }),
   selectTargetAccount: "",
   setSelectedTargetAccount: (account: string) => set({ selectTargetAccount: account }),
-  selectedTargetId: 0,
-  setSelectedTargetId: (id: number) => set( {selectedTargetId: id }),
+  selectTargetId: 0,
+  setSelectedTargetId: (id: number) => set({ selectTargetId: id }),
   money: 0,
   setMoney: (account: number) => set({ money: account })
 }));

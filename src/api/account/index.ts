@@ -4,7 +4,7 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 // 계좌리스트
 export const fetchAccountData = () => {
-  return axios.get(`${baseUrl}/api/my/account?type=a_`);
+  return axios.get(`${baseUrl}/api/my/account?type=a`);
 };
 
 // 연락처
@@ -19,7 +19,7 @@ export const fetchRecentData = () => {
 
 // 은행 데이터
 export const fetchBankData = () => {
-  return axios.get(`${baseUrl}/api/account/bank?type=a_`);
+  return axios.get(`${baseUrl}/api/account/bank?type=a`);
 };
 
 export const updateRemit = (data) => {

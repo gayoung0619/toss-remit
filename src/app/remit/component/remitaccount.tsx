@@ -46,21 +46,23 @@ const RemitAccount = () => {
         </div>
         <div className={styles.tabContent}>
           {selectedTab === 0 && (
-              <div className={styles.tabPanel}>
-                {recentlist?.data.map((item, idx) => (
-                    <div
-                        key={`recent-${idx}`}
-                        className={styles.contactInfo}
-                        onClick={() => handleContactClick(item)}
-                    >
-                      <Image src={Logo} alt={"토스로고"} width={40} height={40}/>
-                      <div>
-                        <strong>{item.name}</strong>
-                        <p>{item.account}</p>
+              <Link href={`/send`}>
+                <div className={styles.tabPanel}>
+                  {recentlist?.data.map((item, idx) => (
+                      <div
+                          key={`recent-${idx}`}
+                          className={styles.contactInfo}
+                          onClick={() => handleContactClick(item)}
+                      >
+                        <Image src={Logo} alt={"토스로고"} width={40} height={40}/>
+                        <div>
+                          <strong>{item.name}</strong>
+                          <p>{item.account}</p>
+                        </div>
                       </div>
-                    </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </Link>
           )}
           {selectedTab === 1 && (
               <Link href={`/send`}>
