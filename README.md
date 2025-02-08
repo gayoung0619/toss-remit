@@ -15,18 +15,19 @@
 - 상태 관리: Zustand를 사용해 송금 요청 중의 상태를 관리합니다. 예를 들어, 송금 진행 상태, 오류 처리 등을 애플리케이션 전역에서 쉽게 관리할 수 있습니다.
 
 ## 📂 프로젝트 구조
-├── public/  
-├── src/  
-│   ├── api/           # API 요청 관련 파일  
-│   ├── app/           # URL 페이지  
-│   ├── assets/        # 이미지 파일  
-│   ├── components/    # 재사용 가능한 컴포넌트  
-│   ├── store/         # Zustand 상태 관리 파일  
-│   ├── utils/         # 유틸리티 함수들  
-├── .env               # 환경 변수 설정  
+├── public/             # 정적 파일 (이미지, 폰트 등)  
+├── src/                # 소스 코드  
+│   ├── api/            # API 요청 관련 파일 (Axios 설정, API 함수 등)  
+│   ├── app/            # 페이지 및 라우팅 설정 (Next.js 페이지)  
+│   ├── assets/         # 이미지, 폰트, 아이콘 등의 정적 자산  
+│   ├── components/     # 재사용 가능한 UI 컴포넌트  
+│   ├── store/          # Zustand 상태 관리 파일  
+│   ├── utils/          # 유틸리티 함수들 (날짜 처리, 포맷팅 등)  
+├── .env                # 환경 변수 설정 (API 키 등)
+
 
 ## 🖥️ 구현화면
-<div style="display: flex; gap: 10px;">
+<div style="display: flex; gap: 5px;">
   <img src="./src/assets/readme/toss1.jpg" alt="송금 화면" width="300" />
   <img src="./src/assets/readme/toss2.jpg" alt="송금 화면" width="300" />
   <img src="./src/assets/readme/toss3.jpg" alt="송금 화면" width="300" />
