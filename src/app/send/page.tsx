@@ -1,48 +1,51 @@
 "use client"
 import styles from "./send.module.css"
-import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {RemitData, updateRemit} from "@/api/account";
-import {useAccountStore} from "@/store/useAccountInfoStore";
-import {useRouter} from "next/navigation";
-import {AxiosError} from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { RemitData, updateRemit } from "@/api/account";
+import { useAccountStore } from "@/store/useAccountInfoStore";
+import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
 import React from "react";
+
 const SendPage = () => {
-  const queryClient = useQueryClient()
-  const router = useRouter()
+  const queryClient = useQueryClient();
+  const router = useRouter();
   const { selectAccountId, selectAccountName, selectTargetAccount, selectMoney, selectTargetId, money, setMoney } = useAccountStore();
+
   const { mutate: updatemoney } = useMutation({
     mutationKey: ["updatemoney"],
     mutationFn: (form: RemitData) => updateRemit(form),
     onSuccess: (res) => {
       queryClient.invalidateQueries({
-        queryKey: ["accountlist"],  // 쿼리 키와 함께 정확한 필터링 정보를 전달
+        queryKey: ["accountlist"],  // 쿼리 키와 함께 정확한 필터링 정보 전달
       });
-      router.push("/result")
+      router.push("/result");
     },
-    onError: (err:AxiosError<{ error: string }>) => {
+    onError: (err: AxiosError<{ error: string }>) => {
       if (err.response) {
         alert(err.response.data.error);
       } else {
         alert("An unexpected error occurred");
       }
-    }
-  })
+    },
+  });
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/,/g, ""); // Remove existing commas
-    value = value.replace(/[^0-9]/g, ""); // Remove any non-numeric characters (except for digits)
+    let value = e.target.value.replace(/,/g, ""); // 기존 콤마 제거
+    value = value.replace(/[^0-9]/g, ""); // 숫자만 남기기
 
     const numericValue = isNaN(Number(value)) || value === "" ? 0 : parseFloat(value);
-    setMoney(numericValue);  // Set numeric value for backend transmission
+    setMoney(numericValue);  // 금액을 숫자 형태로 상태에 저장
   };
 
   const onCreate = () => {
     updatemoney({
       accountId: selectAccountId,
       targetId: selectTargetId,
-      money:  money,
-      type: "a"
-    })
-  }
+      money: money,  // 서버에는 숫자 값만 전송
+      type: "a",
+    });
+  };
 
   return (
       <div className={styles.sendWrap}>
@@ -59,15 +62,15 @@ const SendPage = () => {
                 name="money"
                 id="money"
                 placeholder="얼마나 옮길까요?"
-                value={money.toLocaleString() + "원"}
+                value={money.toLocaleString()}  // 금액을 콤마 구분하여 표시
                 onChange={handleInputChange}
             />
             <button onClick={onCreate}>송금</button>
           </div>
           <p>잔액 {selectMoney.toLocaleString()}원 입력</p>
         </div>
-
       </div>
-  )
-}
-export default SendPage
+  );
+};
+
+export default SendPage;
