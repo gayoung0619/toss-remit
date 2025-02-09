@@ -16,9 +16,8 @@ const SendPage = () => {
     mutationKey: ["updatemoney"],
     mutationFn: (form: RemitData) => updateRemit(form),
     onSuccess: (res) => {
-      queryClient.invalidateQueries({
-        queryKey: ["accountlist"],  // 쿼리 키와 함께 정확한 필터링 정보 전달
-      });
+      queryClient.invalidateQueries({queryKey: ["accountlist"]});
+      queryClient.invalidateQueries({queryKey: ["recentlist"]});
       router.push("/result");
     },
     onError: (err: AxiosError<{ error: string }>) => {
