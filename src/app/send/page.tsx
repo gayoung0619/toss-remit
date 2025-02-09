@@ -25,11 +25,12 @@ const SendPage = () => {
       }
     }
   })
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const numericValue = isNaN(Number(value)) || value === '' ? 0 : parseFloat(value);
-    setMoney(numericValue);
+    let value = e.target.value.replace(/,/g, ""); // Remove existing commas
+    value = value.replace(/[^0-9]/g, ""); // Remove any non-numeric characters (except for digits)
+
+    const numericValue = isNaN(Number(value)) || value === "" ? 0 : parseFloat(value);
+    setMoney(numericValue);  // Set numeric value for backend transmission
   };
 
   const onCreate = () => {
@@ -56,7 +57,7 @@ const SendPage = () => {
                 name="money"
                 id="money"
                 placeholder="얼마나 옮길까요?"
-                value={money}
+                value={money.toLocaleString() + "원"}
                 onChange={handleInputChange}
             />
             <button onClick={onCreate}>송금</button>

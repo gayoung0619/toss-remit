@@ -8,7 +8,7 @@ const ResultPage = () => {
   return (
       <div className={styles.resultWrap}>
         <h2>
-          <strong>{selectTargetAccount}</strong>으로 {money}원을<br /> 옮겼어요.
+          <strong>{selectTargetAccount}</strong>으로 {money.toLocaleString()}원을<br /> 옮겼어요.
         </h2>
         <Link href={`/`}>
           확인
