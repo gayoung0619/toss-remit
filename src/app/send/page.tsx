@@ -1,27 +1,32 @@
 "use client"
 import styles from "./send.module.css"
 import {useMutation} from "@tanstack/react-query";
-import {updateRemit} from "@/api/account";
+import {RemitData, updateRemit} from "@/api/account";
 import {useAccountStore} from "@/store/useAccountInfoStore";
 import {useRouter} from "next/navigation";
+import {AxiosError} from "axios";
+import React from "react";
 const SendPage = () => {
   const router = useRouter()
   const { selectAccountId, selectAccountName, selectTargetAccount, selectMoney, selectTargetId, money, setMoney } = useAccountStore();
   const { mutate: updatemoney } = useMutation({
     mutationKey: ["updatemoney"],
-    mutationFn: (form) => updateRemit(form),
+    mutationFn: (form: RemitData) => updateRemit(form),
     onSuccess: (res) => {
-      alert(res.data.message);
       router.push("/result")
     },
-    onError: (err) => {
-      alert(err.response.data.error)
+    onError: (err:AxiosError<{ error: string }>) => {
+      if (err.response) {
+        alert(err.response.data.error);
+      } else {
+        alert("An unexpected error occurred");
+      }
     }
   })
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const numericValue = isNaN(value) || value === '' ? 0 : parseFloat(value);
+    const numericValue = isNaN(Number(value)) || value === '' ? 0 : parseFloat(value);
     setMoney(numericValue);
   };
 

@@ -3,8 +3,14 @@ import Image from "next/image";
 import Logo from "@/assets/logo-toss.png";
 import Link from "next/link";
 import { useAccountStore } from "@/store/useAccountInfoStore";
+import { AccountData } from "@/api/account";
 
-const AccountList = ({ item }) => {
+
+interface AccountListProps {
+  item: AccountData;
+}
+
+const AccountList = ({ item }: AccountListProps) => {
   const setSelectedAccountId = useAccountStore(
     (state) => state.setSelectedAccountId
   );

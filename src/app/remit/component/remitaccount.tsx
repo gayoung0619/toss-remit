@@ -2,7 +2,7 @@
 import styles from "./remitaccount.module.css";
 import { useTabStore } from "@/store/useTabStore";
 import {useQuery} from "@tanstack/react-query";
-import {fetchContactData, fetchRecentData} from "@/api/account";
+import {fetchContactData, fetchRecentData, RecentData} from "@/api/account";
 import Image from "next/image";
 import Logo from "@/assets/logo-toss.png";
 import Link from "next/link";
@@ -22,7 +22,7 @@ const RemitAccount = () => {
     queryFn: () => fetchContactData()
   });
 
-  const handleContactClick = (item) => {
+  const handleContactClick = (item: any) => {
     setSelectedTargetId(item.id);
     setSelectedTargetAccount(item.account)
   }
