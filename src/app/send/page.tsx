@@ -1,18 +1,20 @@
 "use client"
 import styles from "./send.module.css"
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {RemitData, updateRemit} from "@/api/account";
 import {useAccountStore} from "@/store/useAccountInfoStore";
 import {useRouter} from "next/navigation";
 import {AxiosError} from "axios";
 import React from "react";
 const SendPage = () => {
+  const queryClient = useQueryClient()
   const router = useRouter()
   const { selectAccountId, selectAccountName, selectTargetAccount, selectMoney, selectTargetId, money, setMoney } = useAccountStore();
   const { mutate: updatemoney } = useMutation({
     mutationKey: ["updatemoney"],
     mutationFn: (form: RemitData) => updateRemit(form),
     onSuccess: (res) => {
+      queryClient.invalidateQueries(["accountlist"]);  // 여기서 리렌더링 트리거
       router.push("/result")
     },
     onError: (err:AxiosError<{ error: string }>) => {
@@ -34,7 +36,7 @@ const SendPage = () => {
     updatemoney({
       accountId: selectAccountId,
       targetId: selectTargetId,
-      money: 200,
+      money:  money,
       type: "a"
     })
   }
