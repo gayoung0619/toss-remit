@@ -14,7 +14,9 @@ const SendPage = () => {
     mutationKey: ["updatemoney"],
     mutationFn: (form: RemitData) => updateRemit(form),
     onSuccess: (res) => {
-      queryClient.invalidateQueries(["accountlist"]);  // 여기서 리렌더링 트리거
+      queryClient.invalidateQueries({
+        queryKey: ["accountlist"],  // 쿼리 키와 함께 정확한 필터링 정보를 전달
+      });
       router.push("/result")
     },
     onError: (err:AxiosError<{ error: string }>) => {
