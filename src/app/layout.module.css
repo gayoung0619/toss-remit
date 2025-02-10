@@ -2,7 +2,8 @@
     background: #000;
     max-width: 450px;
     width: calc(100% - 32px);
-    height: 700px;
-    margin: 100px auto 0;
+    height: 100vh;
+    margin: 0 auto;
     padding: 100px 16px 0;
+    box-sizing: border-box;
 }
