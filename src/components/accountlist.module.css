@@ -1,0 +1,31 @@
+.accountList{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.bankInfo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.bankInfo img{
+    border-radius: 50%;
+}
+.bankInfo strong{
+    font-size: 16px;
+}
+.bankInfo p{
+    font-size: 12px;
+    margin-top: 8px;
+    color: rgba(255,255,255, .5);
+    font-weight: 300;
+}
+.bankButton{
+    background: rgba(255,255,255,.25);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: #DDD;
+    cursor: pointer;
+    font-size: 12px;
+}
